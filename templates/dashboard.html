@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Comatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dash_style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+</head>
+
+<body class="dark-mode">
+    <div class="sidebar">
+        <div class="design">
+            <h3>ATTENDANCE LOGGER</h3>
+            <div class="section-1">
+                <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+            </div>
+            <div class="section-2">
+                <a href="{{ url_for('registration') }}" class="btn">Student Registration</a>
+            </div>
+            <div class="section-3">
+                <a href="{{ url_for('userupdate') }}" class="btn">Update info</a>
+            </div>
+            <div class="section-4">
+                <a href="{{ url_for('attmarking') }}" class="btn">Attendance Marking</a>
+            </div>
+            <div class="section-5">
+                <a href="{{ url_for('report') }}" class="btn">Attendance Report</a>
+            </div>
+            <div class="section-6">
+                <a href="{{ url_for('contact') }}" class="btn">Contact Us</a>
+            </div>
+            <form method="post" action="{{ url_for('logout') }}">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <div class="container-fluid">
+            <!-- Welcome Header -->
+            <div class="header">
+                <h1 class="mb-2">Dashboard</h1>
+                <p class="text-muted">Welcome back, <strong>{{ user_email }}</strong>! Here's a summary of your
+                    activity.</p>
+            </div>
+
+            <hr>
+
+            <!-- Stats Cards Container -->
+            <div class="dashboard-container mt-4">
+                <!-- Card 1: Total Students -->
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #eaf2ff;">
+                        <i class="fas fa-users" style="color: #4c82f7;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <p class="stat-label">Total Registered Students</p>
+                        <h3 class="stat-value">{{ total_students }}</h3>
+                    </div>
+                </div>
+
+                <!-- Card 2: Present Today -->
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #e5f8f0;">
+                        <i class="fas fa-user-check" style="color: #2ecc71;"></i>
+                    </div>
+                    <div class="stat-info">
+                        <p class="stat-label">Students Present Today</p>
+                        <h3 class="stat-value">{{ present_today }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================= -->
+            <!--          NEW STUDENT LIST SECTION             -->
+            <!-- ============================================= -->
+            <div class="student-list-card mt-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h4 class="mb-0">Your Registered Students</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-4">Student Name</th>
+                                        <th>Roll Number</th>
+                                        <th>Email</th>
+                                        <th class="text-center">Semester</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Loop through the student_list passed from the backend -->
+                                    {% for student in student_list %}
+                                    <tr>
+                                        <td class="ps-4">{{ student.first_name }} {{ student.last_name }}</td>
+                                        <td>{{ student.student_id }}</td>
+                                        <td>{{ student.email }}</td>
+                                        <td class="text-center">{{ student.semester }}</td>
+                                    </tr>
+                                    <!-- This message shows if the loop is empty -->
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted p-4">
+                                            You have not registered any students yet. <a
+                                                href="{{ url_for('registration') }}">Register one now</a>.
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

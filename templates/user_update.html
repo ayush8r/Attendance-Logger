@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student Info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_update.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!----------------   Sidebar   ---------------->
+    <div class="sidebar">
+        <div class="design">
+            <h3>ATTENDANCE LOGGER</h3>
+            <div class="section-1">
+                <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+            </div>
+            <div class="section-2">
+                <a href="{{ url_for('registration') }}" class="btn">Student Registration</a>
+            </div>
+            <div class="section-3">
+                <a href="{{ url_for('userupdate') }}" class="btn">Update Info</a>
+            </div>
+            <div class="section-4">
+                <a href="{{ url_for('attmarking') }}" class="btn">Attendance Marking</a>
+            </div>
+            <div class="section-5">
+                <a href="{{ url_for('report') }}" class="btn">Attendance Report</a>
+            </div>
+            <div class="section-6">
+                <a href="{{ url_for('contact') }}" class="btn">Contact Us</a>
+            </div>
+            <form method="post" action="{{ url_for('logout') }}">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!----------------   Main Content Area   ---------------->
+    <div class="main-content">
+        <div class="update-container">
+            <div class="form-header">
+                <h2>Update Student Information</h2>
+                <p>Enter a student's roll number to view and update their details.</p>
+            </div>
+
+            <div id="alert_placeholder"></div>
+
+            <!-- Step 1: Search Section -->
+            <div class="search-box">
+                <label for="roll_number_input" class="form-label">Find Student by Roll Number</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="roll_number_input" placeholder="e.g., 21CS001" required>
+                    <button id="show_info_btn" class="btn" type="button">Show Information</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Update Form (Initially Hidden) -->
+            <div id="update_form_section" style="display: none;">
+                <hr class="form-divider">
+                <form id="update_form">
+                    <h4 class="form-section-title">Read-Only Details</h4>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_full_name">Full Name</label>
+                            <input type="text" id="update_full_name" class="form-control" readonly>
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_roll_number">Roll Number</label>
+                            <input type="text" id="update_roll_number" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_email">Email</label>
+                            <input type="email" id="update_email" class="form-control" readonly>
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_semester">Semester</label>
+                            <input type="text" id="update_semester" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section-title editable">Editable Details</h4>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_fathers_name">Father's Name</label>
+                            <input type="text" id="update_fathers_name" class="form-control">
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_mothers_name">Mother's Name</label>
+                            <input type="text" id="update_mothers_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field-group full-width">
+                            <label for="update_address">Street, Area, Landmark</label>
+                            <input type="text" id="update_address" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_city">City</label>
+                            <input type="text" id="update_city" class="form-control">
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_state">State</label>
+                            <input type="text" id="update_state" class="form-control">
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_pin_code">Pin Code</label>
+                            <input type="text" id="update_pin_code" class="form-control" pattern="[0-9]{6}">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- REQUIRED JAVASCRIPT TO MAKE THE PAGE WORK -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const showInfoBtn = document.getElementById('show_info_btn');
+            const updateFormSection = document.getElementById('update_form_section');
+            const updateForm = document.getElementById('update_form');
+            const alertPlaceholder = document.getElementById('alert_placeholder');
+
+            function showAlert(message, type) {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = [
+                    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                    `   <div>${message}</div>`,
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    '</div>'
+                ].join('');
+                alertPlaceholder.innerHTML = ''; // Clear previous alerts
+                alertPlaceholder.append(wrapper);
+            }
+
+            // --- Event Listener for "Show Information" Button ---
+            showInfoBtn.addEventListener('click', async function () {
+                const rollNumber = document.getElementById('roll_number_input').value.trim();
+                if (!rollNumber) {
+                    showAlert('Please enter a roll number.', 'warning');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/get_student_info/${rollNumber}`);
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Could not fetch student data.');
+                    }
+
+                    // Populate the form fields
+                    document.getElementById('update_full_name').value = data.fullName;
+                    document.getElementById('update_roll_number').value = data.rollNumber;
+                    document.getElementById('update_email').value = data.email;
+                    document.getElementById('update_semester').value = data.semester;
+                    document.getElementById('update_fathers_name').value = data.fathersName;
+                    document.getElementById('update_mothers_name').value = data.mothersName;
+                    document.getElementById('update_address').value = data.address;
+                    document.getElementById('update_city').value = data.city;
+                    document.getElementById('update_state').value = data.state;
+                    document.getElementById('update_pin_code').value = data.pinCode;
+
+                    // Show the form
+                    updateFormSection.style.display = 'block';
+                    alertPlaceholder.innerHTML = ''; // Clear any old alerts
+
+                } catch (error) {
+                    showAlert(error.message, 'danger');
+                    updateFormSection.style.display = 'none';
+                }
+            });
+
+            // --- Event Listener for the "Save Changes" Form Submission ---
+            updateForm.addEventListener('submit', async function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                const rollNumber = document.getElementById('update_roll_number').value;
+                const updatedData = {
+                    fathersName: document.getElementById('update_fathers_name').value,
+                    mothersName: document.getElementById('update_mothers_name').value,
+                    address: document.getElementById('update_address').value,
+                    city: document.getElementById('update_city').value,
+                    state: document.getElementById('update_state').value,
+                    pinCode: document.getElementById('update_pin_code').value
+                };
+
+                try {
+                    const response = await fetch(`/update_student_info/${rollNumber}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updatedData)
+                    });
+
+                    const result = await response.json();
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Failed to save changes.');
+                    }
+
+                    showAlert(result.success, 'success');
+
+                } catch (error) {
+                    showAlert(error.message, 'danger');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

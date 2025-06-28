@@ -1,0 +1,432 @@
+/* ================================================= */
+/*         1. GLOBAL STYLES & TYPOGRAPHY             */
+/* ================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ================================================= */
+/*              2. ANIMATION KEYFRAMES               */
+/* ================================================= */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ================================================= */
+/*              3. NAVIGATION BAR                    */
+/* ================================================= */
+
+nav {
+    background-color: #ffffff;
+    padding: 1.2rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00abc6;
+    text-decoration: none;
+}
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+}
+
+/* -- NEW & IMPROVED Nav Link Hover -- */
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Start in the middle */
+    transform: translateX(-50%); /* Center it perfectly */
+    width: 0; /* Start with no width */
+    height: 2px;
+    background: #00c5cc;
+    transition: width 0.3s ease-in-out; /* Animate the width */
+}
+
+.nav-links a:hover {
+    color: #00dede;
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* Expand to full width on hover */
+}
+
+/* ================================================= */
+/*              4. BUTTON STYLES                     */
+/* ================================================= */
+
+.btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #00c6c3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #00ff04;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #00eeff;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #f1ed00;
+    transform: translateY(-2px);
+    transition: 0.4s;
+}
+
+/* ================================================= */
+/*              5. HERO SECTION                      */
+/* ================================================= */
+
+.hero {
+    background: linear-gradient(135deg, #34b3dd, #c3cfe2);
+    min-height: 100vh;
+    padding-top: 140px;
+    padding-bottom: 100px;
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Important for containing the shapes */
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 50%;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #1c2b36;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    color: #555;
+}
+
+/* -- RESTORED Hero Visuals -- */
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    position: relative;
+}
+
+.visual-shape {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.2), rgba(13, 110, 253, 0));
+    border: 1px solid rgba(13, 110, 253, 0.3);
+    position: absolute;
+}
+
+.shape1 { width: 250px; height: 250px; border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%; animation: float 8s ease-in-out infinite; }
+.shape2 { width: 150px; height: 150px; border-radius: 50%; bottom: 40px; right: 50px; animation: float 10s ease-in-out infinite .5s; }
+.shape3 { width: 80px; height: 80px; border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; top: 50px; left: 60px; animation: rotate 15s linear infinite; }
+.shape4 { width: 50px; height: 50px; border-radius: 50%; bottom: 100px; left: 80px; animation: float 6s ease-in-out infinite .2s; }
+
+
+/* ================================================= */
+/*           6. GENERAL SECTION STYLING              */
+/* ================================================= */
+
+section {
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1c2b36;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    color: #666;
+}
+
+/* ================================================= */
+/*        7. "MEET THE TEAM" & GLASSMORPHISM         */
+/* ================================================= */
+
+#about {
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(37, 117, 252, 0.2), transparent 50%),
+        radial-gradient(circle at 80% 90%, rgba(106, 17, 203, 0.2), transparent 50%);
+    background-attachment: fixed;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.team-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+.team-card:hover {
+    transform: translateY(-50px);
+}
+
+.team-grid .team-card:nth-child(1) { animation-delay: 0.2s; }
+.team-grid .team-card:nth-child(2) { animation-delay: 0.4s; }
+
+.team-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    border: 4px solid #00ffe1;
+    box-shadow: 0 5px 15px rgba(15, 221, 240, 0.749);
+}
+
+.team-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1c2b36;
+    margin-bottom: 0.25rem;
+}
+
+.team-role {
+    color: #0d6efd;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    background-color: #fff;
+    color: #555;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #120f0f;
+    color: #4adb11;
+    transform: scale(1.1);
+}
+
+/* ================================================= */
+/*           8. CONTACT SECTION (ENHANCED)           */
+/* ================================================= */
+
+#contact {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+}
+
+#contact .section-title,
+#contact .section-subtitle {
+    color: #fff; /* Make title and subtitle text white */
+}
+
+.card-contact {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2.5rem;
+    border-radius: 12px;
+}
+
+form {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.75rem; /* Increased value for more space */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly visible background */
+    color: #fff; /* White text for input */
+    transition: all 0.3s ease;
+}
+
+/* Style for the placeholder text */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    background-color: #ffffff;
+    color: #1c0e0e; /* Blue text */
+    border-radius: 50px;
+}
+
+.btn-submit:hover {
+    background-color: #00f9bf;
+    transform: translateY(-2px);
+}
+
+
+/* ================================================= */
+/*           9. FOOTER                             */
+/* ================================================= */
+
+footer {
+    background-color: #1c2b36;
+    color: #a7bace;
+    text-align: center;
+    padding: 2.5rem 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ================================================= */
+/*           10. RESPONSIVE DESIGN                   */
+/* ================================================= */
+
+@media (max-width: 992px) {
+    .hero-container { flex-direction: column; text-align: center; }
+    .hero-content { max-width: 100%; order: 2; }
+    .hero-visual { order: 1; margin-bottom: 3rem; height: 300px; width: 100%; }
+    .hero-title { font-size: 2.8rem; }
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding-top: 60px; text-align: center; }
+    .hero-title { font-size: 2.2rem; }
+    .section-title { font-size: 2rem; }
+    .team-grid { grid-template-columns: 1fr; }
+}
