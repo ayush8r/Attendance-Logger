@@ -1,0 +1,301 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+html, body {
+    height: 100%;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f7fc; /* A clean, light blue-grey background */
+    color: #525f7f; /* A softer, professional text color */
+}
+
+/* ================================================= */
+/*          2. SIDEBAR (Your Design, Polished)       */
+/* ================================================= */
+
+.sidebar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #1c2b36;
+    border-right: 3px solid #2ecc71; /* Slightly thicker border for emphasis */
+    padding: 0 0 0 40px;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 50px; 
+}
+
+.design {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* Reduced gap for a tighter look */
+    width: 100%;
+    padding-right: 40px;
+}
+
+.design h3 {
+    font-size: 22px;
+    text-align: left;
+    color: #2ecc71; /* The vibrant green from your theme */
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    font-weight: 600;
+}
+
+.design .btn {
+    background-color: transparent;
+    color: #e9ecef; /* Softer white for better readability */
+    text-align: left;
+    padding: 12px 20px;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 8px; /* A modern, slight radius */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    cursor: pointer;
+}
+
+.design .btn:hover {
+    background-color: rgba(46, 204, 113, 0.1); /* Use the theme green for hover */
+    color: #2ecc71;
+    padding-left: 25px; /* A nice indent effect on hover */
+}
+
+/* Style for the active dashboard link */
+.design .btn.active {
+    background-color: #2ecc71;
+    color: #1c2b36; /* Dark text on the green background */
+    font-weight: bold;
+}
+
+/* ================================================= */
+/*          3. MAIN CONTENT (THE MAKEOVER!)          */
+/* ================================================= */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-content {
+    margin-left: 280px; 
+    padding: 40px;
+    height: 100vh;
+    overflow-y: auto; 
+    transition: margin-left 0.3s ease-in-out;
+    animation: fadeIn 0.6s ease-out;
+    background-color: #e2dad0;
+}
+
+/* --- Page Header --- */
+.main-content h2 {
+    font-weight: 700;
+    font-size: 2.25rem;
+    color: #2c3e50; /* A strong, professional navy */
+    margin-bottom: 0.25rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.main-content p.text-muted {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #8898aa !important; /* Softer mute color */
+}
+
+.main-content hr {
+    margin-bottom: 2.5rem;
+    border-top: 1px solid #e0e6ed;
+}
+
+/* --- Modern Card Styling --- */
+.card {
+    border: none;
+    border-radius: 12px; /* More pronounced rounding */
+    box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+    background-color: #ffffff;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px -10px rgba(150, 170, 180, 0.7);
+}
+
+/* --- Semester Selection Form --- */
+.form-select, .form-control {
+    border-radius: 8px;
+    border: 1px solid #d2d6da;
+    transition: all 0.2s ease;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: #5e72e4;
+    box-shadow: 0 0 0 0.2rem rgba(94, 114, 228, 0.25);
+}
+
+.btn-primary {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.65rem 1.5rem;
+    background-image: linear-gradient(45deg, #5e72e4 0%, #825ee4 100%);
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Attendance Table & Form --- */
+.card .card-header.bg-dark {
+    border-radius: 12px 12px 0 0;
+    background-image: linear-gradient(87deg, #4291ce 0%, #92b9d4 100%) !important;
+    border-bottom: none;
+    padding: 1.25rem 1.5rem;
+}
+
+.card-header h4 {
+    color: #fff;
+    font-weight: 600;
+}
+
+.table-responsive {
+    border-radius: 0 0 12px 12px;
+}
+
+.table {
+    margin-bottom: 0 !important;
+}
+
+.table th {
+    font-weight: 600;
+    color: #8898aa;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 1rem 1.5rem;
+    background-color: #f6f9fc !important;
+    border-top: none;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 0.95rem;
+    color: #525f7f;
+    padding: 1rem 1.5rem;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f4ff; /* A subtle blueish hover */
+}
+
+/* --- Humanized Present/Absent Buttons --- */
+.btn-group .btn {
+    transition: all 0.2s cubic-bezier(.68,-.55,.27,1.55); /* Bouncy transition */
+    border-width: 2px;
+}
+
+.btn-group .btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-check:checked+.btn-outline-success {
+    background-color: #2dce89;
+    color: #fff;
+    box-shadow: 0 4px 10px -2px rgba(45, 206, 137, 0.5);
+    transform: scale(1.05);
+}
+
+.btn-check:checked+.btn-outline-danger {
+    background-color: #f5365c;
+    color: #fff;
+    box-shadow: 0 4px 10px -2px rgba(245, 54, 92, 0.5);
+    transform: scale(1.05);
+}
+
+/* --- Final Submit Button --- */
+.card-footer {
+    background-color: #fff;
+    border-top: 1px solid #e9ecef;
+    padding: 1.5rem;
+    border-radius: 0 0 12px 12px;
+}
+
+.btn-lg.btn-success {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    padding: 0.8rem 2.5rem;
+    background-image: linear-gradient(45deg, #2dce89 0%, #2dcecc 100%);
+    border: none;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.btn-lg.btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Special Alert for "No Students" --- */
+.alert.alert-info {
+    background-color: #e1f5fe;
+    color: #01579b;
+    border: 1px solid #b3e5fc;
+    border-left-width: 5px;
+    font-weight: 500;
+}
+
+/* ================================================= */
+/*          4. RESPONSIVE STYLES                     */
+/* ================================================= */
+
+@media (max-width: 991.98px) {
+    .sidebar {
+        left: -280px; /* Hide sidebar completely */
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    
+    .main-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .col-md-4 .btn {
+        width: 100%;
+        margin-top: 1rem !important; /* Override Bootstrap inline style */
+    }
+    
+    .card-footer {
+        text-align: center !important;
+    }
+
+    .card-footer .btn-lg {
+        width: 100%;
+    }
+
+    .table th, .table td {
+        padding: 0.75rem; /* Reduce padding on mobile for more space */
+    }
+}

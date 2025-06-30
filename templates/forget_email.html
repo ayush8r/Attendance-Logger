@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='forget_style.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Forgot Password</h2>
+        <div id="message-area">
+            <!-- Display error messages from Flask -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <p class="subtitle">Enter your registered email address to receive a one-time password (OTP).</p>
+
+        <form action="{{ url_for('forgot_password') }}" method="post">
+            <div id="email-section">
+                <div class="input-group">
+                    <div class="input-field-container">
+                        <input type="email" id="email" name="email" placeholder="Enter your Registered Email" required>
+                        <button type="submit" class="action-button">Send OTP</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="login-link-container">
+            <a href="{{ url_for('login') }}" class="login-link">Back to Login</a>
+        </div>
+    </div>
+</body>
+
+</html>

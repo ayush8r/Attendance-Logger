@@ -1,0 +1,260 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+html, body {
+    height: 100%;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f7fc; /* A clean, light blue-grey background */
+    color: #525f7f; /* A softer, professional text color */
+}
+
+/* ================================================= */
+/*          2. SIDEBAR (Your Design, Polished)       */
+/* ================================================= */
+
+.sidebar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #1c2b36;
+    border-right: 3px solid #2ecc71; /* Slightly thicker border for emphasis */
+    padding: 0 0 0 40px;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 50px; 
+}
+
+.design {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* Reduced gap for a tighter look */
+    width: 100%;
+    padding-right: 40px;
+}
+
+.design h3 {
+    font-size: 22px;
+    text-align: left;
+    color: #2ecc71; /* The vibrant green from your theme */
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    font-weight: 600;
+}
+
+.design .btn {
+    background-color: transparent;
+    color: #e9ecef; /* Softer white for better readability */
+    text-align: left;
+    padding: 12px 20px;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 8px; /* A modern, slight radius */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    cursor: pointer;
+}
+
+.design .btn:hover {
+    background-color: rgba(46, 204, 113, 0.1); /* Use the theme green for hover */
+    color: #2ecc71;
+    padding-left: 25px; /* A nice indent effect on hover */
+}
+
+/* Style for the active dashboard link */
+.design .btn.active {
+    background-color: #2ecc71;
+    color: #1c2b36; /* Dark text on the green background */
+    font-weight: bold;
+}
+.main-content {
+    margin-left: 280px; /* This must match the sidebar's width */
+    padding: 40px;
+    height: 100vh;
+    overflow-y: auto; /* Allows scrolling for content that is too long */
+}
+
+@media (max-width: 991.98px) {
+
+    /* 1. Hide the sidebar completely on small screens */
+    .sidebar {
+        display: none;
+    }
+
+    /* 2. Make the main content take up the full width */
+    .main-content {
+        margin-left: 0; /* Remove the large margin */
+        padding: 20px;   /* Reduce padding for smaller screens */
+    }
+
+    /* 3. Make the form input sections stack vertically */
+    .post1, .post2 , .dropdown, .post3, .post4, .post5, .post6, .address {
+        width: 100%; /* Make them full-width instead of 45% */
+    }
+
+    /* Optional: Center the main title */
+    .main-content h2 {
+        text-align: center;
+    }
+}
+
+
+/* ======================================================== */
+/*          3. MAIN CONTENT (STYLED TO MATCH IMAGE)         */
+/* ======================================================== */
+.main-content {
+    margin-left: 280px; 
+    padding: 40px;
+    height: 100vh;
+    overflow-y: auto; 
+    background-color: #e2dad0;
+}
+
+/* --- Page Header --- */
+.main-content h1 {
+    font-size: 2.5rem; /* Large, prominent heading */
+    font-weight: 700;
+    color: #343a40; /* Dark heading color from image */
+    margin-bottom: 0.5rem !important;
+}
+
+.main-content .text-muted {
+    font-size: 1rem;
+    color: #6c757d !important; /* Lighter text color from image */
+}
+
+/* --- Tab Navigation Bar --- */
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6; /* The main line under the tabs */
+}
+
+/* --- Tab Links --- */
+.nav-tabs .nav-link {
+    background: none;
+    border: 1px solid transparent; /* Reserve space for the border */
+    border-bottom: none;
+    color: #6c757d; /* Lighter gray for inactive tabs */
+    margin-bottom: -1px; /* CRITICAL: This makes the active tab connect to the content */
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    transition: color 0.2s ease-in-out;
+    border-radius: 15px;
+}
+
+/* Inactive tabs on hover */
+.nav-tabs .nav-link:not(.active):hover {
+    color: #343a40; /* Darken text on hover */
+    border-color: transparent;
+}
+
+/* ACTIVE tab link styling */
+.nav-tabs .nav-link.active {
+    background-color: #fff; /* White background to cover the line below */
+    color: #343a40; /* Dark, bold text for active tab */
+    border-color: #dee2e6 #dee2e6 #fff; /* Top, left/right, and a white bottom border */
+    font-weight: 600;
+}
+
+/* --- Tab Content Area --- */
+.tab-content {
+    background-color: #fff;
+    padding: 2.5rem;
+    border: 1px solid #dee2e6;
+    border-top: none; /* Merges seamlessly with the active tab */
+    /* Override Bootstrap's default shadow to match the image's clean border */
+    box-shadow: none !important; 
+    border-radius: 15px;
+}
+
+.tab-pane h5 {
+    font-size: 1.25rem;
+    color: #343a40;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* --- Form Elements --- */
+.form-label {
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    border: 1px solid #ced4da; /* Standard light-gray border */
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe; /* A subtle blue focus color */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* --- The "View Report" Button (styled as plain text) --- */
+.tab-pane .btn {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-top: 1.5rem;
+    color: #0d6efd; /* Standard link blue */
+    font-weight: 500;
+    text-align: left;
+    /* Remove any lingering button styles */
+    box-shadow: none !important;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.tab-pane .btn:hover {
+    color: #0a58ca;
+    text-decoration: underline; /* Add underline on hover to indicate it's clickable */
+}
+
+/* --- Results Table Styling (clean and minimal) --- */
+#report-card {
+    border-radius: 8px;
+    border: 1px solid #75efd5;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, .075) !important;
+}
+#report-card .card-header {
+    background-color: #79f6a1; /* Light header for the results */
+    border-bottom: 1px solid #dee2e6;
+}
+#report-card h4 {
+    color: #343a40;
+}
+#report-card .table th {
+    background-color: #a0c0df !important;
+}
+
+/* ================================================= */
+/*          4. RESPONSIVE STYLES                     */
+/* ================================================= */
+@media (max-width: 991.98px) {
+    .sidebar {
+        display: none;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+@media (max-width: 576px) {
+    .main-content {
+        padding: 15px;
+    }
+    .tab-content {
+        padding: 1.5rem;
+    }
+    .main-content h1 {
+        font-size: 2rem;
+    }
+}

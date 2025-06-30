@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+</head>
+
+<body>
+
+    <!-- =================================
+        NEW NAVIGATION BAR
+        ================================= -->
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="nav-links">
+                <!-- Flask's url_for helper generates the correct link -->
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <form method="post" action="{{ url_for('logout') }}">
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- =================================
+        END OF NAVIGATION BAR
+        ================================= -->
+
+    <!-- 
+    =======================================================================
+
+    This is a working contact form. To receive email, 
+    Access Key here 👉 https://web3forms.com/
+
+    =======================================================================
+    -->
+
+    <div class="contact-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h1>Contact Us</h1>
+                <p>Fill up the form below to send us a message.</p>
+            </div>
+
+            <form action="https://api.web3forms.com/submit" method="POST">
+
+                <input type="hidden" name="access_key" value="b9cdbdf7-e106-410e-94d1-4322b6b70c01" />
+                <input type="hidden" name="subject" value="New Submission from your Awesome Form!" />
+                <!-- <input type="checkbox" name="botcheck" id="" style="display: none;" /> -->
+
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" name="name" id="name" placeholder="Your Name" required class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="email@example.com" required
+                        class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="text" name="phone" id="phone" placeholder="+91 1234567890" required
+                        class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea rows="2" name="message" id="message" placeholder="Your message here..." required
+                        class="form-textarea"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </div>
+
+                <p class="form-footer" id="result"></p>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

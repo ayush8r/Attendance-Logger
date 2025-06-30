@@ -1,0 +1,158 @@
+<!-- templates/user_update.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student Info</title>
+    <!-- CSS files remain the same -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_update.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!----------------   Sidebar (No changes needed)   ---------------->
+    <div class="sidebar">
+        <div class="design">
+            <h3>ATTENDANCE LOGGER</h3>
+            <div class="section-1">
+                <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+            </div>
+            <div class="section-2">
+                <a href="{{ url_for('registration') }}" class="btn">Student Registration</a>
+            </div>
+            <div class="section-3">
+                <a href="{{ url_for('userupdate') }}" class="btn active">Update Info</a>
+            </div>
+            <div class="section-4">
+                <a href="{{ url_for('attendancemarking') }}" class="btn">Attendance Marking</a>
+            </div>
+            <div class="section-5">
+                <a href="{{ url_for('attendancereport') }}" class="btn">Attendance Report</a>
+            </div>
+            <div class="section-6">
+                <a href="{{ url_for('contact') }}" class="btn">Contact Us</a>
+            </div>
+            <form method="post" action="{{ url_for('logout') }}">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <!----------------   Main Content Area   ---------------->
+    <div class="main-content">
+        <div class="update-container">
+            <div class="form-header">
+                <h2>Update Student Information</h2>
+                <p>Enter a student's roll number to view and update their details.</p>
+            </div>
+
+            <!-- This div will now display flashed messages from Flask -->
+            <div id="alert_placeholder">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show"
+                    role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+
+            <!-- Step 1: Search Form -->
+            <form action="{{ url_for('userupdate') }}" method="POST" class="search-box">
+                <label for="roll_number_input" class="form-label">Find Student by Roll Number</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="roll_number_input" name="roll_number_search"
+                        placeholder="e.g., 21CS001" value="{{ student.student_id if student else '' }}" required>
+                    <button class="btn" type="submit">Show Information</button>
+                </div>
+            </form>
+
+            <!-- Step 2: Update Form (Conditionally Rendered) -->
+            {% if student %}
+            <div id="update_form_section">
+                <hr class="form-divider">
+                <form action="{{ url_for('update_student_info') }}" method="POST">
+                    <!-- Hidden input to identify which student to update -->
+                    <input type="hidden" name="student_id_to_update" value="{{ student.id }}">
+
+                    <h4 class="form-section-title">Read-Only Details</h4>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_full_name">Full Name</label>
+                            <input type="text" id="update_full_name" class="form-control"
+                                value="{{ student.first_name }} {{ student.last_name }}" readonly>
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_roll_number">Roll Number</label>
+                            <input type="text" id="update_roll_number" class="form-control"
+                                value="{{ student.student_id }}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_email">Email</label>
+                            <input type="email" id="update_email" class="form-control" value="{{ student.email }}"
+                                readonly>
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_semester">Semester</label>
+                            <input type="text" id="update_semester" class="form-control" value="{{ student.semester }}"
+                                readonly>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section-title editable">Editable Details</h4>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_fathers_name">Father's Name</label>
+                            <input type="text" id="update_fathers_name" name="fathers_name" class="form-control"
+                                value="{{ student.fathers_name }}">
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_mothers_name">Mother's Name</label>
+                            <input type="text" id="update_mothers_name" name="mothers_name" class="form-control"
+                                value="{{ student.mothers_name }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field-group full-width">
+                            <label for="update_address">Street, Area, Landmark</label>
+                            <input type="text" id="update_address" name="address" class="form-control"
+                                value="{{ student.address }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field-group">
+                            <label for="update_city">City</label>
+                            <input type="text" id="update_city" name="city" class="form-control"
+                                value="{{ student.city }}">
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_state">State</label>
+                            <input type="text" id="update_state" name="state" class="form-control"
+                                value="{{ student.state }}">
+                        </div>
+                        <div class="form-field-group">
+                            <label for="update_pin_code">Pin Code</label>
+                            <input type="text" id="update_pin_code" name="pin_code" class="form-control"
+                                pattern="[0-9]{6}" value="{{ student.pin_code }}">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Save Changes</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Include Bootstrap JS for dismissible alerts to work -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
