@@ -146,8 +146,7 @@ def logout():
 
 
 # =============================      PROTECTED DASHBOARD ROUTES     ==========================
-
-# Replace your old /dashboard function with this corrected one
+# === this is the new dashboard design ......................
 
 @app.route('/dashboard')
 def dashboard():
